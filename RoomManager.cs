@@ -32,24 +32,34 @@ public class RoomManager : MonoBehaviour
         this.theDoors[3].SetActive(currentRoom.hasExit("west"));
     }
 
+    private void tryMove(string direction)
+    {
+        Core.thePlayer.getCurrentRoom().tryToTakeExit(direction);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //try to goto the north
+            tryMove("north");
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            //try to goto the west
+            tryMove("west");
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            //try to goto the east
+            tryMove("east");
         }
         else if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //try to goto the south
+            tryMove("south");
         }
+    }
+
+    void FixedUpdate()
+    {
+        setupRoom();
     }
 }
